@@ -1,0 +1,67 @@
+[project]
+name = "xlsz"
+version = "0.0.1"
+description = "xlsx file reader/writer"
+authors = [{ name = "zztkm", email = "zztkm@tsurutatakumi.info" }]
+dependencies = ["pytest>=8.0.0"]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[build-system]
+requires = ["maturin>=1.2,<2.0"]
+build-backend = "maturin"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "pip>=24.0",
+    "mypy>=1.8.0",
+    "pytest-speed>=0.3.5",
+    "pytest-xdist>=3.5.0",
+]
+
+[tool.maturin]
+python-source = "python"
+module-name = "xlsz._lowlevel"
+features = ["pyo3/extension-module"]
+
+[tool.rye.scripts]
+test = "pytest -vv -ra -n auto tests"
+typecheck = "mypy python tests"
+
+
+[tool.ruff]
+src = ["python", "tests"]
+exclude = [
+    ".venv",
+    "dist",
+    "config",
+    ".git",
+    ".eggs",
+    "__pypackages__",
+    ".tox",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".hypothesis",
+    ".ruff_cache",
+]
+
+line-length = 128
+target-version = "py311"
+
+[tool.ruff.lint]
+# TODO: lint rule を追加する
+select = ["I", "E", "F", "W", "B", "UP"]
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
