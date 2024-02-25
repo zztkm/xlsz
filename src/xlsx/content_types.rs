@@ -1,21 +1,16 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
+#[serde(rename = "Types")]
 pub struct ContentTypes {
-    #[serde(rename = "Types")]
-    types: Types,
-}
-
-#[derive(Serialize, Deserialize)]
-pub struct Types {
     #[serde(rename = "Default")]
-    types_default: Vec<Default>,
+    pub types_default: Vec<Default>,
 
     #[serde(rename = "Override")]
-    types_override: Vec<Override>,
+    pub types_override: Vec<Override>,
 
     #[serde(rename = "@xmlns")]
-    xmlns: String,
+    pub xmlns: String,
 }
 
 #[derive(Serialize, Deserialize)]

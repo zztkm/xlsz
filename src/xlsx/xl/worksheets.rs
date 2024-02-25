@@ -1,13 +1,7 @@
 use serde::{Deserialize, Serialize};
 
-/// シート毎のデータを表す構造体
 #[derive(Serialize, Deserialize)]
-pub struct Sheet {
-    #[serde(rename = "worksheet")]
-    worksheet: Worksheet,
-}
-
-#[derive(Serialize, Deserialize)]
+#[serde(rename = "worksheet")]
 pub struct Worksheet {
     #[serde(rename = "dimension")]
     dimension: Dimension,
@@ -19,7 +13,7 @@ pub struct Worksheet {
     sheet_format_pr: SheetFormatPr,
 
     #[serde(rename = "sheetData")]
-    sheet_data: SheetData,
+    pub sheet_data: SheetData,
 
     #[serde(rename = "phoneticPr")]
     phonetic_pr: PhoneticPr,
@@ -48,10 +42,10 @@ pub struct Worksheet {
     #[serde(rename = "@xmlns:xr3")]
     xmlns_xr3: String,
 
-    #[serde(rename = "@mc:Ignorable")]
-    mc_ignorable: String,
+    #[serde(rename = "@Ignorable")]
+    ignorable: String,
 
-    #[serde(rename = "@xr:uid")]
+    #[serde(rename = "@uid")]
     xr_uid: String,
 }
 
@@ -91,22 +85,22 @@ pub struct PhoneticPr {
 #[derive(Serialize, Deserialize)]
 pub struct SheetData {
     #[serde(rename = "row")]
-    row: Vec<Row>,
+    pub row: Vec<Row>,
 }
 
 #[derive(Serialize, Deserialize)]
 pub struct Row {
     #[serde(rename = "c")]
-    c: C,
+    pub c: C,
 
     #[serde(rename = "@r")]
-    r: String,
+    pub r: String,
 
     #[serde(rename = "@spans")]
-    spans: Spans,
+    pub spans: Spans,
 
-    #[serde(rename = "@x14ac:dyDescent")]
-    x14_ac_dy_descent: String,
+    #[serde(rename = "@dyDescent")]
+    pub x14_ac_dy_descent: String,
 }
 
 /// セル情報を表す構造体
@@ -133,7 +127,7 @@ pub struct SheetFormatPr {
     #[serde(rename = "@defaultRowHeight")]
     default_row_height: String,
 
-    #[serde(rename = "@x14ac:dyDescent")]
+    #[serde(rename = "@dyDescent")]
     x14_ac_dy_descent: String,
 }
 
@@ -146,6 +140,7 @@ pub struct SheetViews {
 #[derive(Serialize, Deserialize)]
 pub struct SheetView {
     #[serde(rename = "@tabSelected")]
+    #[serde(default)]
     tab_selected: String,
 
     #[serde(rename = "@workbookViewId")]

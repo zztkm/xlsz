@@ -1,0 +1,6 @@
+class Xlsx:
+    """Xlsx Reader / Writer"""
+
+    def __init__(self, xlsx_file: str) -> None: ...
+
+    def get_sheet_names(self) -> list[str]: ...

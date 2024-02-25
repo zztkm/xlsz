@@ -1,12 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
-pub struct Styles {
-    #[serde(rename = "styleSheet")]
-    style_sheet: StyleSheet,
-}
-
-#[derive(Serialize, Deserialize)]
+#[serde(rename = "styleSheet")]
 pub struct StyleSheet {
     #[serde(rename = "numFmts")]
     num_fmts: NumFmts,
@@ -35,9 +30,6 @@ pub struct StyleSheet {
     #[serde(rename = "tableStyles")]
     table_styles: TableStyles,
 
-    #[serde(rename = "extLst")]
-    ext_lst: ExtLst,
-
     #[serde(rename = "@xmlns")]
     xmlns: String,
 
@@ -52,9 +44,6 @@ pub struct StyleSheet {
 
     #[serde(rename = "@xmlns:xr")]
     xmlns_xr: String,
-
-    #[serde(rename = "@mc:Ignorable")]
-    mc_ignorable: String,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -178,48 +167,6 @@ pub struct Dxfs {
 }
 
 #[derive(Serialize, Deserialize)]
-pub struct ExtLst {
-    #[serde(rename = "ext")]
-    ext: Vec<Ext>,
-}
-
-#[derive(Serialize, Deserialize)]
-pub struct Ext {
-    #[serde(rename = "slicerStyles")]
-    slicer_styles: Option<SlicerStyles>,
-
-    #[serde(rename = "@xmlns:x14")]
-    xmlns_x14: Option<String>,
-
-    #[serde(rename = "@uri")]
-    uri: String,
-
-    #[serde(rename = "timelineStyles")]
-    timeline_styles: Option<TimelineStyles>,
-
-    #[serde(rename = "@xmlns:x15")]
-    xmlns_x15: Option<String>,
-}
-
-#[derive(Serialize, Deserialize)]
-pub struct SlicerStyles {
-    #[serde(rename = "@defaultSlicerStyle")]
-    default_slicer_style: String,
-
-    #[serde(rename = "@_prefix")]
-    prefix: String,
-}
-
-#[derive(Serialize, Deserialize)]
-pub struct TimelineStyles {
-    #[serde(rename = "@defaultTimelineStyle")]
-    default_timeline_style: String,
-
-    #[serde(rename = "@_prefix")]
-    prefix: String,
-}
-
-#[derive(Serialize, Deserialize)]
 pub struct Fills {
     #[serde(rename = "fill")]
     fill: Vec<Fill>,
@@ -249,6 +196,7 @@ pub struct Fonts {
     count: String,
 
     #[serde(rename = "@x14ac:knownFonts")]
+    #[serde(default)]
     x14_ac_known_fonts: String,
 }
 

@@ -1,13 +1,16 @@
 mod shared_strings;
 mod styles;
+mod workbook;
 mod worksheets;
 
 pub use shared_strings::SharedStrings;
-pub use styles::Styles;
-pub use worksheets::Sheet;
+pub use styles::StyleSheet;
+pub use workbook::Workbook;
+pub use worksheets::Worksheet;
 
 pub struct Xl {
-    pub worksheets: Vec<Sheet>,
+    pub worksheets: Vec<Worksheet>,
     pub shared_strings: SharedStrings,
-    pub styles: Styles,
+    pub stylesheet: StyleSheet,
+    pub workbook: Workbook,
 }

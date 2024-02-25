@@ -22,11 +22,11 @@ dev-dependencies = [
 
 [tool.maturin]
 python-source = "python"
-module-name = "xlsz._lowlevel"
+module-name = "xlsz._xlsx"
 features = ["pyo3/extension-module"]
 
 [tool.rye.scripts]
-test = "pytest -vv -ra -n auto tests"
+test = "pytest -vv -v -ra -n auto tests"
 typecheck = "mypy python tests"
 
 

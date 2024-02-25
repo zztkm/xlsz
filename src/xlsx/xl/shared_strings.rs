@@ -1,15 +1,10 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
+#[serde(rename = "sst")]
 pub struct SharedStrings {
-    #[serde(rename = "sst")]
-    sst: Sst,
-}
-
-#[derive(Serialize, Deserialize)]
-pub struct Sst {
     #[serde(rename = "si")]
-    si: Vec<Si>,
+    pub si: Vec<Si>,
 
     #[serde(rename = "@xmlns")]
     xmlns: String,
@@ -25,7 +20,7 @@ pub struct Sst {
 pub struct Si {
     /// text
     #[serde(rename = "t")]
-    t: String,
+    pub t: String,
 
     #[serde(rename = "phoneticPr")]
     phonetic_pr: PhoneticPr,
