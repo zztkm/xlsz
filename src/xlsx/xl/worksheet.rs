@@ -1,5 +1,7 @@
+use pyo3::prelude::*;
 use serde::{Deserialize, Serialize};
 
+#[pyclass]
 #[derive(Serialize, Deserialize)]
 #[serde(rename = "worksheet")]
 pub struct Worksheet {
@@ -91,7 +93,7 @@ pub struct SheetData {
 #[derive(Serialize, Deserialize)]
 pub struct Row {
     #[serde(rename = "c")]
-    pub c: C,
+    pub c: Vec<C>,
 
     #[serde(rename = "@r")]
     pub r: String,
@@ -104,22 +106,24 @@ pub struct Row {
 }
 
 /// セル情報を表す構造体
+// NOTE: pyclass の中で利用される構造体は自分も pyclass を実装している必要がある。
+#[pyclass]
 #[derive(Serialize, Deserialize)]
 pub struct C {
     /// value
-    #[serde(rename = "v")]
-    v: Option<String>,
+    #[serde(default, rename = "v")]
+    pub v: String,
 
     #[serde(rename = "@r")]
-    r: String,
+    pub r: String,
 
     /// if t = "s" then v is index of shared string.
     #[serde(rename = "@t")]
-    t: Option<String>,
+    pub t: Option<String>,
 
     /// if s is not None then s is index of style(cellXfs).
     #[serde(rename = "@s")]
-    s: Option<String>,
+    pub s: Option<String>,
 }
 
 #[derive(Serialize, Deserialize)]

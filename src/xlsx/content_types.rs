@@ -1,5 +1,7 @@
+use pyo3::prelude::*;
 use serde::{Deserialize, Serialize};
 
+#[pyclass]
 #[derive(Serialize, Deserialize)]
 #[serde(rename = "Types")]
 pub struct ContentTypes {
