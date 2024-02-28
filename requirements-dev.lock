@@ -9,20 +9,34 @@
 
 -e file:.
 click==8.1.7
+    # via pytest-speed
 colorama==0.4.6
+    # via click
+    # via pytest
 execnet==2.0.2
+    # via pytest-xdist
 iniconfig==2.0.0
+    # via pytest
 markdown-it-py==3.0.0
+    # via rich
 mdurl==0.1.2
+    # via markdown-it-py
 mypy==1.8.0
 mypy-extensions==1.0.0
+    # via mypy
 packaging==23.2
+    # via pytest
+pip==24.0
 pluggy==1.4.0
+    # via pytest
 pygments==2.17.2
+    # via rich
 pytest==8.0.0
+    # via pytest-speed
+    # via pytest-xdist
 pytest-speed==0.3.5
 pytest-xdist==3.5.0
 rich==13.7.0
+    # via pytest-speed
 typing-extensions==4.9.0
-# The following packages are considered to be unsafe in a requirements file:
-pip==24.0
+    # via mypy
