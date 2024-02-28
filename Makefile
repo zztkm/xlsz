@@ -1,5 +1,15 @@
 ARCH=linux/arm64
 PY_VERSION=3.12
+VERSION := $$(make -s show-version)
+
+.PHONY: tag
+tag:
+	git tag $(VERSION)
+	git push origin $(VERSION)
+
+.PHONY: show-version
+show-version:
+	@rye version
 
 .PHONY: dev
 dev:
