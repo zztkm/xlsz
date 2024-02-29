@@ -91,9 +91,7 @@ impl Xlsx {
     pub fn new(xlsx_file: String) -> Self {
         // カレントディレクトリを取得
         let current_dir = std::env::current_dir().unwrap();
-        println!("{:?}", current_dir);
         // ファイルを読み込む
-        println!("{:?}", xlsx_file);
         let fname = std::path::Path::new(&xlsx_file);
         let display = fname.display();
         let file = match fs::File::open(fname) {
