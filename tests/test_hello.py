@@ -1,3 +1,5 @@
+from typing import List
+
 import pytest
 
 from xlsz import Xlsx
@@ -19,7 +21,7 @@ def test_hello():
         ),
     ],
 )
-def test_get_sheet_values(sheet_name: str, expected: list[list[str]]):
+def test_get_sheet_values(sheet_name: str, expected: List[List[str]]):
     """シートのデータのテスト"""
     """表示形式が標準のデータのテスト"""
     xlsx = Xlsx("tests/testdata/testdata.xlsx")
@@ -44,7 +46,7 @@ def test_get_sheet_values(sheet_name: str, expected: list[list[str]]):
         ),
     ],
 )
-def test_get_sheet_values_with_for_loop(sheet_name: str, expected: list[list[str]]):
+def test_get_sheet_values_with_for_loop(sheet_name: str, expected: List[List[str]]):
     """シートのデータのテスト"""
     """表示形式が標準のデータのテスト"""
     xlsx = Xlsx("tests/testdata/testdata.xlsx")
