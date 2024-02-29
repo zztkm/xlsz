@@ -25,6 +25,7 @@ jobs:
       - run: echo "$HOME/.rye/shims" >> $GITHUB_PATH
       - run: rye pin cpython@${{ matrix.python-version }}
       - run: rye config --set-bool behavior.use-uv=true
+      - run: rye install maturin
       - run: rye sync
       - name: Test
         run: make test
