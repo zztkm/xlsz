@@ -2,7 +2,7 @@ use pyo3::prelude::*;
 use serde::{Deserialize, Serialize};
 
 #[pyclass]
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 #[serde(rename = "workbook")]
 pub struct Workbook {
     #[serde(rename = "sheets")]
@@ -12,7 +12,7 @@ pub struct Workbook {
     file_version: FileVersion,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct AlternateContent {
     #[serde(rename = "Choice")]
     choice: Choice,
@@ -24,7 +24,7 @@ pub struct AlternateContent {
     prefix: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct Choice {
     #[serde(rename = "absPath")]
     abs_path: AbsPath,
@@ -36,7 +36,7 @@ pub struct Choice {
     prefix: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct AbsPath {
     #[serde(rename = "@xmlns:x15ac")]
     xmlns_x15_ac: String,
@@ -48,13 +48,13 @@ pub struct AbsPath {
     prefix: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct BookViews {
     #[serde(rename = "workbookView")]
     workbook_view: WorkbookView,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct WorkbookView {
     #[serde(rename = "@xWindow")]
     x_window: String,
@@ -72,19 +72,19 @@ pub struct WorkbookView {
     xr2_uid: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct CalcPr {
     #[serde(rename = "@calcId")]
     calc_id: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct ExtLst {
     #[serde(rename = "ext")]
     ext: Vec<Ext>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct Ext {
     #[serde(rename = "workbookPr")]
     workbook_pr: Option<ExtWorkbookPr>,
@@ -102,7 +102,7 @@ pub struct Ext {
     xmlns_xcalcf: Option<String>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct CalcFeatures {
     #[serde(rename = "feature")]
     feature: Vec<Feature>,
@@ -111,7 +111,7 @@ pub struct CalcFeatures {
     prefix: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct Feature {
     #[serde(rename = "@name")]
     name: String,
@@ -120,7 +120,7 @@ pub struct Feature {
     prefix: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct ExtWorkbookPr {
     #[serde(rename = "@chartTrackingRefBase")]
     chart_tracking_ref_base: String,
@@ -129,7 +129,7 @@ pub struct ExtWorkbookPr {
     prefix: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct FileVersion {
     #[serde(rename = "@appName")]
     app_name: String,
@@ -144,7 +144,7 @@ pub struct FileVersion {
     rup_build: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct RevisionPtr {
     #[serde(rename = "@revIDLastSave")]
     rev_id_last_save: String,
@@ -165,13 +165,13 @@ pub struct RevisionPtr {
     prefix: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct Sheets {
     #[serde(rename = "sheet")]
     pub sheet: Vec<Sheet>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct Sheet {
     #[serde(rename = "@name")]
     pub name: String,

@@ -1,3 +1,4 @@
+use core::num;
 use pyo3::iter::IterNextOutput;
 use pyo3::prelude::*;
 use quick_xml::de::from_str;
@@ -11,6 +12,7 @@ use xl::{SharedStrings, StyleSheet, Workbook, Worksheet, Xl, C};
 
 #[pyclass]
 pub struct SheetValuesIter {
+    xl: Xl,
     sheet: Worksheet,
     shared_strings: SharedStrings,
     row_index: usize,
@@ -20,11 +22,12 @@ pub struct SheetValuesIter {
 #[pymethods]
 impl SheetValuesIter {
     #[new]
-    pub fn new(sheetdata: &str, sstdata: &str) -> Self {
+    pub fn new(xl: Xl, sheetdata: &str, sstdata: &str) -> Self {
         let sheet: Worksheet = from_str(sheetdata).unwrap();
         let shared_strings: SharedStrings = from_str(sstdata).unwrap();
         let length = sheet.sheet_data.row.len();
         SheetValuesIter {
+            xl,
             sheet,
             shared_strings,
             row_index: 0,
@@ -48,6 +51,9 @@ impl SheetValuesIter {
     }
 
     fn get_cell_value(&self, cell: &C) -> String {
+        // &cell.t があれば shared string から文字列を取得する
+        // &cell.r があれば style から文字列フォーマットを取得する
+        // どちらもあてはまらない場合は &cell.v をそのまま返す
         match &cell.t {
             Some(t) => {
                 if t == "s" {
@@ -57,7 +63,14 @@ impl SheetValuesIter {
                     cell.v.clone()
                 }
             }
-            None => cell.v.clone(),
+            None => match &cell.s {
+                Some(s) => {
+                    let index = s.parse::<usize>().unwrap();
+                    let num_fmt_id = &self.xl.stylesheet.cell_xfs.xf[index].num_fmt_id;
+                    num_fmt_id.clone()
+                }
+                None => cell.v.clone(),
+            },
         }
     }
 }
@@ -89,8 +102,6 @@ impl Xlsx {
     /// TODO: error handling: https://pyo3.rs/v0.20.2/function/error_handling
     #[new]
     pub fn new(xlsx_file: String) -> Self {
-        // カレントディレクトリを取得
-        let current_dir = std::env::current_dir().unwrap();
         // ファイルを読み込む
         let fname = std::path::Path::new(&xlsx_file);
         let display = fname.display();
@@ -121,7 +132,7 @@ impl Xlsx {
         let filename = format!("xl/worksheets/sheet{}.xml", sheet_id);
         let data = self.read_file(&filename);
         let sstdata = self.read_file("xl/sharedStrings.xml");
-        SheetValuesIter::new(&data, &sstdata)
+        SheetValuesIter::new(self.xl.clone(), &data, &sstdata)
     }
 
     fn read_file(&mut self, filename: &str) -> String {

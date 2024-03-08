@@ -21,7 +21,7 @@ prod:
 
 .PHONY: test
 test: dev
-	rye run test
+	rye test -- -vv -v -ra -n auto tests
 
 .PHONY: bench
 bench: prod

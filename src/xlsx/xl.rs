@@ -10,6 +10,7 @@ pub use workbook::Workbook;
 pub use worksheet::{Worksheet, C};
 
 #[pyclass]
+#[derive(Clone)]
 pub struct Xl {
     pub stylesheet: StyleSheet,
     pub workbook: Workbook,

@@ -2,14 +2,14 @@ use pyo3::prelude::*;
 use serde::{Deserialize, Serialize};
 
 #[pyclass]
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 #[serde(rename = "styleSheet")]
 pub struct StyleSheet {
     #[serde(rename = "numFmts")]
-    num_fmts: NumFmts,
+    pub num_fmts: NumFmts,
 
     #[serde(rename = "cellXfs")]
-    cell_xfs: CellXfs,
+    pub cell_xfs: CellXfs,
 
     #[serde(rename = "fonts")]
     fonts: Fonts,
@@ -48,7 +48,7 @@ pub struct StyleSheet {
     xmlns_xr: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct Borders {
     #[serde(rename = "border")]
     border: Border,
@@ -57,7 +57,7 @@ pub struct Borders {
     count: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct Border {
     #[serde(rename = "left")]
     left: String,
@@ -75,7 +75,7 @@ pub struct Border {
     diagonal: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct CellStyleXfs {
     #[serde(rename = "xf")]
     xf: CellStyleXfsXf,
@@ -84,7 +84,7 @@ pub struct CellStyleXfs {
     count: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct CellStyleXfsXf {
     #[serde(rename = "alignment")]
     alignment: Alignment,
@@ -102,13 +102,13 @@ pub struct CellStyleXfsXf {
     border_id: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct Alignment {
     #[serde(rename = "@vertical")]
     vertical: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct CellStyles {
     #[serde(rename = "cellStyle")]
     cell_style: CellStyle,
@@ -117,7 +117,7 @@ pub struct CellStyles {
     count: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct CellStyle {
     #[serde(rename = "@name")]
     name: String,
@@ -129,22 +129,23 @@ pub struct CellStyle {
     builtin_id: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[pyclass]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct CellXfs {
     #[serde(rename = "xf")]
-    xf: Vec<XfElement>,
+    pub xf: Vec<XfElement>,
 
     #[serde(rename = "@count")]
-    count: String,
+    pub count: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct XfElement {
     #[serde(rename = "alignment")]
     alignment: Alignment,
 
     #[serde(rename = "@numFmtId")]
-    num_fmt_id: String,
+    pub num_fmt_id: String,
 
     #[serde(rename = "@fontId")]
     font_id: String,
@@ -162,13 +163,13 @@ pub struct XfElement {
     apply_number_format: Option<String>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct Dxfs {
     #[serde(rename = "@count")]
     count: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct Fills {
     #[serde(rename = "fill")]
     fill: Vec<Fill>,
@@ -177,19 +178,19 @@ pub struct Fills {
     count: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct Fill {
     #[serde(rename = "patternFill")]
     pattern_fill: PatternFill,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct PatternFill {
     #[serde(rename = "@patternType")]
     pattern_type: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct Fonts {
     #[serde(rename = "font")]
     font: Vec<Font>,
@@ -202,7 +203,7 @@ pub struct Fonts {
     x14_ac_known_fonts: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct Font {
     #[serde(rename = "sz")]
     sz: Charset,
@@ -223,37 +224,37 @@ pub struct Font {
     scheme: Charset,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct Charset {
     #[serde(rename = "@val")]
     val: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct Color {
     #[serde(rename = "@theme")]
     theme: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct NumFmts {
     #[serde(rename = "numFmt")]
-    num_fmt: Vec<NumFmt>,
+    pub num_fmt: Vec<NumFmt>,
 
     #[serde(rename = "@count")]
-    count: String,
+    pub count: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct NumFmt {
     #[serde(rename = "@numFmtId")]
-    num_fmt_id: String,
+    pub num_fmt_id: String,
 
     #[serde(rename = "@formatCode")]
-    format_code: String,
+    pub format_code: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct TableStyles {
     #[serde(rename = "@count")]
     count: String,
