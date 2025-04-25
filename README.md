@@ -1,15 +1,5 @@
 # xlsz
 
-## リファクタリング中
+xlsx ファイルを Rust で読み込むためのライブラリです。書き込むもサポートするかは未定です。
 
-以下のような構造にする
-
-root
-- README.md
-- src
-  - Rust 版 xlsz
-  - pyo3 に依存させない
-- python/xlsz
-  - Python 版 xlsz
-
-xlsx reader/writer for Python & Rust.
+現在、xlsz (Rust) の実装に注力しているため、xlsz-py の更新は止まっています。
