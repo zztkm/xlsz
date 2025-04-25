@@ -8,6 +8,7 @@ edition = "2024"
 name = "xlsz_py"
 crate-type = ["cdylib"]
 
+# xlsz の実装が落ち着いたらこのライブラリの依存関係は、xlsz と pyo3 のみにする
 [dependencies]
 pyo3 = "0.19.0"
 quick-xml = { version = "0.31.0", features = ["serialize"] }

@@ -1,0 +1,10 @@
+[package]
+name = "xlsz"
+description = "A library for reading Excel files in Rust"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+quick-xml = { version = "0.31.0", features = ["serialize"] }
+serde = { version = "1.0.196", features = ["derive"] }
+zip = "0.6.6"
